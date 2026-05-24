@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const sendEmail = require('../config/sendEmail');
 const getModelByRole = require('../utils/getModelByRole');
 
+const isProduction = process.env.NODE_ENV === 'production' || process.env.FRONTEND_URL?.includes('onrender.com');
 
 async function registerUser(req, res) {
     const { firstName, lastName, email, password, phone, address, city, pincode, lat, long } = req.body;
@@ -21,7 +22,7 @@ async function registerUser(req, res) {
     res.cookie("token", token, {
     httpOnly: true,
     secure: true,
-    sameSite: "none",
+    sameSite: isProduction ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000
 });
 
@@ -56,7 +57,7 @@ async function loginUser(req, res) {
     res.cookie("token", token, {
     httpOnly: true,
     secure: true,
-    sameSite: "none",
+    sameSite: isProduction ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000
 });
 
@@ -129,7 +130,7 @@ async function registerProvider(req, res) {
 res.cookie("token", token, {
     httpOnly: true,
     secure: true,
-    sameSite: "none",
+    sameSite: isProduction ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000
 });
     // Response
@@ -165,7 +166,7 @@ async function loginProvider(req, res) {
     res.cookie("token", token, {
     httpOnly: true,
     secure: true,
-    sameSite: "none",
+    sameSite: isProduction ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000
 });
 
@@ -189,7 +190,7 @@ function logOut(req, res) {
     res.clearCookie("token", {
     httpOnly: true,
     secure: true,
-    sameSite: "none",
+    sameSite: isProduction ? 'none' : 'lax',
 });
     res.status(200).json({ message: 'User logged out successfully' });
 }
