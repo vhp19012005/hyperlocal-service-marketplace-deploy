@@ -17,7 +17,7 @@ app.use(cors({
     origin: process.env.FRONTEND_URL, // Adjust this to your frontend's origin
     credentials: true,
 }));
-
+console.log("Backend URL:", process.env.FRONTEND_URL);
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(path.join(__dirname, "../uploads")));

@@ -21,7 +21,7 @@ const UserLogin = () => {
       password: password
     };
     try{
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/user/login`, newUser,{withCredentials:true});
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/user/login`, newUser);
 
       if(response.status === 200){
        if (email === 'admin@admin.com' && password === 'admin123') {
