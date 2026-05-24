@@ -21,7 +21,7 @@ const UserLogin = () => {
       password: password
     };
     try{
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/user/login`, newUser);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/user/login`, newUser,{withCredentials:true});
 
       if(response.status === 200){
        if (email === 'admin@admin.com' && password === 'admin123') {
@@ -56,7 +56,7 @@ const UserLogin = () => {
         navigate('/');
       }
     }catch(err){
-      setError(err.response?.data?.message );
+      setError(err.response?.data?.message || 'Login failed');
     }
     setEmail('');
     setPassword('');

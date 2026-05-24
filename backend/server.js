@@ -1,6 +1,9 @@
+// 1. ALWAYS LOAD ENVIRONMENT VARIABLES FIRST
+require('dotenv').config();
+
+// 2. NOW LOAD YOUR APP AND DATABASE
 const app = require('./src/app');
 const connectDB = require('./src/db');
-require('dotenv').config();
 
 // Connect to the database
 connectDB();
