@@ -10,7 +10,7 @@ const SProtectRouter = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/home/sprovider/profile", {
+      .get(`${process.env.VITE_BACKEND_URL}/api/home/sprovider/profile`, {
         withCredentials: true,
       })
       .then((res) => {
