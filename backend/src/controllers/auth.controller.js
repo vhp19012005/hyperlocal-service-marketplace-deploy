@@ -18,7 +18,12 @@ async function registerUser(req, res) {
     const user = await userModel.create({ firstName, lastName, email, password: hashedPassword, phone, address, city, pincode, lat, long });
 
     const token = jwt.sign({ id: user._id, role: "user" }, process.env.JWT_SECRET);
-    res.cookie('token', token);
+    res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000
+});
 
     res.status(201).json({
         message: 'User registered successfully',
@@ -48,7 +53,12 @@ async function loginUser(req, res) {
     }
 
     const token = jwt.sign({ id: user._id, role: "user" }, process.env.JWT_SECRET);
-    res.cookie('token', token);
+    res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000
+});
 
     res.status(200).json({
         message: 'User logged in successfully',
@@ -116,8 +126,12 @@ async function registerProvider(req, res) {
 
     // JWT Token
     const token = jwt.sign({ id: provider._id, role: "provider" }, process.env.JWT_SECRET);
-    res.cookie('token', token);
-
+res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000
+});
     // Response
     res.status(201).json({
         message: 'Service Provider registered successfully',
@@ -148,7 +162,12 @@ async function loginProvider(req, res) {
     }
 
     const token = jwt.sign({ id: provider._id, role: "provider" }, process.env.JWT_SECRET);
-    res.cookie('token', token);
+    res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000
+});
 
     res.status(200).json({
         message: 'Service Provider logged in successfully',
@@ -166,7 +185,12 @@ async function loginProvider(req, res) {
 
 function logOut(req, res) {
     const token = req.cookies.token;
-    res.clearCookie('token');
+    
+    res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+});
     res.status(200).json({ message: 'User logged out successfully' });
 }
 

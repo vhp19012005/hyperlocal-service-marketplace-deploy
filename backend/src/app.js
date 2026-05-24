@@ -13,6 +13,7 @@ const adminRoutes = require('./routes/admin.routes');
 const path = require('path');
 const cors = require('cors');
 const app = express();
+app.set("trust proxy", 1);
 app.use(cors({
     origin: process.env.FRONTEND_URL, // Adjust this to your frontend's origin
     credentials: true,
