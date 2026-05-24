@@ -137,7 +137,7 @@ useEffect(() => {
 
   const handleAccept = async (requestId) => {
     try {
-      await axios.post(`http://localhost:3000/api/booking/${requestId}/accept`, {}, { withCredentials: true });
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/booking/${requestId}/accept`, {}, { withCredentials: true });
       setServiceRequests(prevRequests => 
         prevRequests.map(request => 
           request.id === requestId 
@@ -153,8 +153,8 @@ useEffect(() => {
   };
 
   const handleReject = async (requestId) => {
-    
-      await axios.post(`http://localhost:3000/api/booking/${requestId}/reject`, {}, { withCredentials: true });
+
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/booking/${requestId}/reject`, {}, { withCredentials: true });
       setServiceRequests(prevRequests => 
         prevRequests.map(request => 
           request.id === requestId 
