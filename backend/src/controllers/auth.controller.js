@@ -23,6 +23,7 @@ async function registerUser(req, res) {
     httpOnly: true,
     secure: true,
     sameSite: isProduction ? 'none' : 'lax',
+    partitioned: isProduction ? true : false,
     maxAge: 7 * 24 * 60 * 60 * 1000
 });
 
@@ -58,6 +59,7 @@ async function loginUser(req, res) {
     httpOnly: true,
     secure: true,
     sameSite: isProduction ? 'none' : 'lax',
+    partitioned: isProduction ? true : false,
     maxAge: 7 * 24 * 60 * 60 * 1000
 });
 
@@ -131,6 +133,7 @@ res.cookie("token", token, {
     httpOnly: true,
     secure: true,
     sameSite: isProduction ? 'none' : 'lax',
+        partitioned: isProduction ? true : false,
     maxAge: 7 * 24 * 60 * 60 * 1000
 });
     // Response
@@ -167,6 +170,7 @@ async function loginProvider(req, res) {
     httpOnly: true,
     secure: true,
     sameSite: isProduction ? 'none' : 'lax',
+        partitioned: isProduction ? true : false,
     maxAge: 7 * 24 * 60 * 60 * 1000
 });
 
@@ -191,6 +195,7 @@ function logOut(req, res) {
     httpOnly: true,
     secure: true,
     sameSite: isProduction ? 'none' : 'lax',
+    partitioned: isProduction ? true : false,
 });
     res.status(200).json({ message: 'User logged out successfully' });
 }
