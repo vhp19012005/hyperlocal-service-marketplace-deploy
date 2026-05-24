@@ -184,7 +184,7 @@ async function loginProvider(req, res) {
             email: provider.email,
             lat: provider.lat,
             long: provider.long
-        }
+        }   
     });
 }
 

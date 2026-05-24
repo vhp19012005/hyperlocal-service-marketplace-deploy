@@ -168,7 +168,7 @@ const UserProfile = () => {
 
                   <img
 
-                    src={`http://localhost:3000/uploads/users/${user.profile.profileImage}`}
+                    src={`${import.meta.env.VITE_BACKEND_URL}/uploads/users/${user.profile.profileImage}`}
 
                     alt="Profile"
 
